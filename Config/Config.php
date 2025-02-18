@@ -95,8 +95,8 @@ class Config
 	 */
     public function get($template, $tld = '')
     {
-        $template = strtolower($template);
-
+        $template = strtolower(is_array($template)?$template[0]:$template);
+	    
         if (strlen($tld)) {
             if ((isset($this->customConfig[$tld])) || isset($this->config[$tld])) {
                 $template = strtolower($tld);
