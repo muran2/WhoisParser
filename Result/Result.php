@@ -254,7 +254,10 @@ class Result extends AbstractResult
                                     }
                                 }
                             } else {
-                                if (strtolower($networkContactValue) === strtolower($value)) {
+                                if ( (is_array($value) && in_array($networkContactValue, $value))
+                                    ||
+                                    (!is_array($value) && strtolower($networkContactValue) === strtolower($value))
+                                ) {
                                     if ($this->lastHandle !== $networkContactKey) {
                                         $this->lastId = - 1;
                                     }
