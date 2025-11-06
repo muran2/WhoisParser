@@ -67,9 +67,12 @@ abstract class Regex extends AbstractTemplate {
                     foreach ($contactArray as $contactObject) {
                         // if contact handle in network matches the one in
                         // Result, we have to clone it
-                        if (strtolower($contactObject->handle) !== strtolower($handle)) {
+                        $h=is_array($contactObject->handle)?$contactObject->handle:[$contactObject->handle];
+                        $h=array_map('strtolower', $h);
+                        if (!in_array(strtolower($handle), $h)) {
                             continue;
                         }
+
 
                         if (empty($result->contacts->$type)) {
                             $result->contacts->$type = Array();
